@@ -55,14 +55,15 @@ session.mount('https://', adapter)
 # date range input configurations
 system_arguments = sys.argv[1:]
 
-if len(system_arguments) == 1 and system_arguments[0] == 'day':
-    time_delta = timedelta(days=1)
-elif len(system_arguments) == 1 and system_arguments[0] == 'week':
-    time_delta = timedelta(days=7)
-elif len(system_arguments) == 1 and system_arguments[0] == 'month':
-    time_delta = timedelta(days=31)
-else:
-    raise ValueError("Выберите аргумент для вызова: day, week или month.")
+match system_arguments[0]:
+    case "day":
+        time_delta = timedelta(days=1)
+    case "week":
+        time_delta = timedelta(days=7)
+    case "month":
+        time_delta = timedelta(days=31)
+    case _:
+        raise ValueError("Выберите аргумент для вызова: day, week или month.")
 
 # date configurations
 date_today = datetime.today().replace(hour=0, minute=0, second=0, microsecond=0)
