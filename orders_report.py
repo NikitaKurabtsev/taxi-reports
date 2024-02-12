@@ -4,7 +4,7 @@ import os
 import sys
 from datetime import datetime, timedelta
 from time import sleep
-from typing import List, Optional, Tuple
+from typing import List, Optional, Tuple, Dict
 
 import pandas as pd
 import requests
@@ -121,7 +121,7 @@ def get_driver_orders_body(
     park_id: str,
     from_date: str,
     to_date: str
-) -> dict:
+) -> Dict:
     orders_list_body = {
         "limit": 500,
         "query": {
@@ -155,7 +155,7 @@ def get_driver_transactions_body(
     driver_order_id: str,
     from_date: str,
     to_date: str
-) -> dict:
+) -> Dict:
     transactions_list_body = {
         "query": {
             "park": {
@@ -243,7 +243,7 @@ def fetch_1c_drivers(
     url: str,
     login: bytes,
     password: str
-) -> dict:
+) -> Optional[dict]:
     """Fetches driver's from 1c database."""
     drivers_1c: Optional[dict] = None
     body: dict = {'DetailBalance': False}
@@ -314,7 +314,7 @@ def fetch_driver_transactions_list(
     url: str,
     body: dict,
     headers: dict
-) -> list[dict]:
+) -> List[dict]:
     """Fetches driver's orders from the Yandex API."""
     transactions = []
     try:
